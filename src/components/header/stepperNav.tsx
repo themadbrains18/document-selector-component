@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
-import { useParams } from 'react-router';
 
 interface Breadcrumb {
   name: string;
