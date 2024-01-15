@@ -1,25 +1,23 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import DocumentSelector from './components/documentSecelctor';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import Dashboard from './Layouts/Dashboard';
+import Documents from './pages';
 
 // layouts
-import Dashboard from './Layouts/Dashboard';
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/dashboard' element={<Dashboard />} >
+      <Route path='documents/:document' element={<Documents />} />
+    </Route>
+  )
+)
 
 const App: React.FC = () => {
   return (
-      <BrowserRouter>
-        
-        <Routes>
-          {/* Define your routes using Route component */}
-          {/* <Route path="/personal-info" element={PersonalInfo} /> */}
-          <Route path="/agreements" element={<Dashboard><DocumentSelector /></Dashboard>} />
 
-          {/* Handle 404 Not Found */}
-          <Route path="*" element={`<div>404 Not Found</div>`} />
-        </Routes>
-      </BrowserRouter>
+    <RouterProvider router={router} />
 
   );
 };

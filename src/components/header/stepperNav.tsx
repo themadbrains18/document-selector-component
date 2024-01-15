@@ -1,25 +1,23 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
+import { useParams } from 'react-router';
 
-// Breadcrumb data
-const breadcrumbs = [
-  { name: 'Personal Info', href: '/personal-info', current: false },
-  { name: 'Role', href: '/role', current: false },
-  { name: 'Role Details', href: '/role-details', current: false },
-  { name: 'Compensation', href: '/compensation', current: true },
-  { name: 'Agreements', href: '/agreements', current: false },
-  { name: 'Additional Info', href: '/additional-info', current: false },
-  { name: 'Source', href: '/souce', current: false },
-  { name: 'Equipment', href: '/equipment', current: true },
-  { name: 'Offer', href: 'offer', current: false },
-  { name: 'Review', href: 'review', current: true },
-];
+interface Breadcrumb {
+  name: string;
+  href: string;
+  current: boolean;
+}
 
-// Header component
-export default function Header() {
+interface StepperProps {
+  breadcrumbs: Breadcrumb[];
+  currentIndex: number;
+}
+
+
+// Step Navigator
+export default function StepperNav(props: StepperProps) {
   return (
-    <header className='w-full px-6 py-4 bg-white border-b border-gray-200 fixed top-0 z-10'>
+    <div className='w-full px-6 py-4 bg-white border-b border-gray-200 fixed top-0 z-10'>
       <div className='flex justify-between items-center mb-6'>
         {/* Header title */}
         <h2 className='font-inter text-2xl text-gray-900 font-bold'>Select Agreements, Notices and Other Documents</h2>
@@ -49,7 +47,7 @@ export default function Header() {
         {/* Breadcrumb navigation */}
         <nav className="flex" aria-label="Breadcrumb">
           <div className="flex items-center gap-2.5 overflow-x-auto">
-            {breadcrumbs.map((breadcrumb, index) => (
+            {props?.breadcrumbs.map((breadcrumb, index) => (
               <Fragment key={index}>
                 {/* Separator icon */}
                 {index > 0 && (
@@ -72,15 +70,15 @@ export default function Header() {
                 <Popover>
                   {({ open }) => (
                     <>
-                      <Link
-                        to={breadcrumb.href}  // Use Link to create a breadcrumb link
-                        className="block leading-[19px] text-sm font-semibold text-gray-600 hover:text-orange-500 hover:border-orange-500 focus:outline-none focus:ring-1 focus:bg-orange-50 focus:text-orange-500  focus:ring-orange-500 focus:border-orange-500 px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap"
-                      >
+                      <button
+                        // to={breadcrumb.href} 
+                        className={`block leading-[19px] text-sm font-semibold text-gray-600 hover:text-orange-500 hover:border-orange-500 focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500' : 'text-gray-600'} 
+                        ${props?.currentIndex === index ? 'text-orange-500 bg-orange-50 ring-1 ring-orange-500 border-orange-500' : ''}`}>
                         {breadcrumb.name}
                         <span className="sr-only">
-                          {index + 1 === breadcrumbs.length ? '(current page)' : ''}
+                          {index + 1 === props?.breadcrumbs.length ? '(current page)' : ''}
                         </span>
-                      </Link>
+                      </button>
 
                       {/* Breadcrumb details */}
                       <Transition
@@ -96,7 +94,7 @@ export default function Header() {
                           <div className="p-4">
                             <p className="text-sm text-gray-500">
                               You are here: {breadcrumb.name}
-                              {index + 1 === breadcrumbs.length ? ' (current page)' : ''}
+                              {index + 1 === props?.breadcrumbs.length ? ' (current page)' : ''}
                             </p>
                           </div>
                         </Popover.Panel>
@@ -110,6 +108,6 @@ export default function Header() {
         </nav>
 
       </div>
-    </header>
+    </div>
   );
 }
