@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDocContext } from '../../context';
 
 // Interface for props passed to Accordion component
@@ -7,48 +7,43 @@ interface AccordionProps {
         heading: string;
         list: string[];
     };
+    isOpen: boolean;
+    onToggle: () => void;
 }
 
+
 // Accordion component definition
-const Accordion: React.FC<AccordionProps> = ({ accordionData }) => {
-    // Accessing context using the useDocContext hook
-    const { setSelectedDocuments, selectedDocuments } = useDocContext()
+const Accordion: React.FC<AccordionProps> = ({ accordionData, isOpen, onToggle }) => {
+    const { setSelectedDocuments, selectedDocuments } = useDocContext();
+    const [contentHeight, setContentHeight] = useState<number | null>(null);
+    const contentRef = useRef<HTMLUListElement | null>(null);
 
-    // State to manage the visibility of the accordion content
-    const [toggle, setToggle] = useState(false);
-
-    // Function to toggle the visibility of the accordion content
-    const accordionToggle = (e: any) => {
-        let sibbling = e.currentTarget.nextSibling
-        let getheight = sibbling.scrollHeight;
-        setToggle(!toggle);
-
-        // Toggle height of the accordion content
-        if (!sibbling.getAttribute('style')) {
-            sibbling.style.height = `${getheight}px`
-        }
-        else {
-            sibbling.removeAttribute('style')
-        }
-    }
-
-    // Function to handle document click in the accordion
     const handleDocumentClick = (item: string) => {
         if (!selectedDocuments.includes(item)) {
-            // Set the selected document in the context
             setSelectedDocuments([...selectedDocuments, item]);
         }
     };
 
+    useEffect(() => {
+        if (contentRef.current) {
+            // Set the height of the content based on its scrollHeight
+            setContentHeight(isOpen ? contentRef.current.scrollHeight : 0);
+        }
+    }, [isOpen]);
+
+
     return (
         <>
             {/* Accordion header */}
-            <div className={`flex justify-between items-center p-5 border-gray-200 border-b cursor-pointer last:border-none ${toggle ? "bg-gray-100" : ""} `} onClick={(e) => { accordionToggle(e) }}>
+            <div
+                className={`flex justify-between items-center p-5 border-gray-200 border-b cursor-pointer last:border-none ${isOpen ? 'bg-gray-100' : ''}`}
+                onClick={() => onToggle()}
+            >
                 {/* Accordion heading */}
-                <span className={`font-medium font-inter ${toggle ? "text-gray-900" : "text-gray-600"}`}  >{accordionData?.heading}</span>
+                <span className={`font-medium font-inter ${isOpen ? "text-gray-900" : "text-gray-600"}`}  >{accordionData?.heading}</span>
 
                 {/* Accordion toggle icon */}
-                <div className={`duration-300 ${toggle ? "-rotate-180" : ""}`}>
+                <div className={`duration-300 ${isOpen ? "-rotate-180" : ""}`}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -66,7 +61,11 @@ const Accordion: React.FC<AccordionProps> = ({ accordionData }) => {
             </div>
 
             {/* Accordion content */}
-            <ul className={`transition-all duration-300 h-0 overflow-hidden border-b border-gray-200`}  >
+            <ul
+                ref={contentRef}
+                className={`transition-all duration-300 overflow-hidden border-b border-gray-200`}
+                style={{ height: contentHeight !== null ? `${contentHeight}px` : 'auto' }}
+            >
                 {accordionData.list.map((item, index) => (
                     <li key={index} className='py-2 px-[14px] flex items-center justify-between hover:bg-orange-50 rounded-md cursor-pointer mb-[10px] first:my-2 last:py-2' onClick={() => handleDocumentClick(item)}>
                         {/* Document name */}

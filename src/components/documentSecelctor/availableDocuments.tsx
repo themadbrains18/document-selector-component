@@ -10,6 +10,14 @@ const AvailableDocuments = () => {
     // State to keep track of selected filters
     const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
+    // State to keep track of the currently open accordion index
+    const [openAccordionIndex, setOpenAccordionIndex] = useState<number | null>(null);
+
+    // Function to toggle accordion visibility
+    const toggleAccordion = (index: number) => {
+        setOpenAccordionIndex((prevIndex) => (prevIndex === index ? null : index));
+    };
+
     // Filter options
     const filters = [
         {
@@ -34,19 +42,19 @@ const AvailableDocuments = () => {
     const accordions = [
         {
             heading: "Drug Policies",
-            list: ["Alabama - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
+            list: ["Alabama1 - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
         },
         {
             heading: "Employee Handbooks",
-            list: ["Alabama - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
+            list: ["Alabama2 - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
         },
         {
             heading: "Equipment Selection",
-            list: ["Alabama - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
+            list: ["Alabama3 - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Illinois - Employee Handbook", "Kansas - Employee Handbook", "New York - Employee Handbook", "Utah - Employee Handbook"]
         },
         {
             heading: "Payroll Handbook",
-            list: ["1 Alabama - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Alabama - Non-Compete Agreement"]
+            list: ["1 Alabama4 - Non-Compete Agreement", "California - Non-Compete Agreement", "Colorado - Non-Compete Agreement", "Florida - Non-Compete Agreement", "Alabama - Non-Compete Agreement"]
         },
         {
             heading: "PTO Policy",
@@ -166,7 +174,10 @@ const AvailableDocuments = () => {
                     accordions?.map((accordionData, index) => {
                         return (
                             <Fragment key={accordionData?.heading}>
-                                <Accordion accordionData={accordionData} />
+                                <Accordion accordionData={accordionData}
+                                    isOpen={openAccordionIndex === index}
+                                    onToggle={() => toggleAccordion(index)}
+                                />
                             </Fragment>
                         )
                     })
