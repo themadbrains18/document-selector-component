@@ -69,15 +69,15 @@ export default function StepperNav(props: StepperProps) {
                 <Popover>
                   {({ open }) => (
                     <>
-                      <button
+                      <div
                         // to={breadcrumb.href} 
-                        className={`block leading-[19px] text-sm font-semibold text-gray-600 hover:text-orange-500 hover:border-orange-500 focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500' : 'text-gray-600'} 
+                        className={`block leading-[19px] cursor-default text-sm font-semibold text-gray-600 hover:text-orange-500 hover:border-orange-500 focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500' : 'text-gray-600'} 
                         ${props?.currentIndex === index ? 'text-orange-500 bg-orange-50 ring-1 ring-orange-500 border-orange-500' : ''}`}>
                         {breadcrumb.name}
                         <span className="sr-only">
                           {index + 1 === props?.breadcrumbs.length ? '(current page)' : ''}
                         </span>
-                      </button>
+                      </div>
 
                       {/* Breadcrumb details */}
                       <Transition
