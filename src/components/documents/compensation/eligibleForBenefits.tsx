@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-import { RadioGroup } from '@headlessui/react'
-
-
-import { Menu } from '@headlessui/react'
+import { RadioGroup, Menu } from '@headlessui/react'
 
 const EligibleForBenefits = () => {
     let [plan, setPlan] = useState();
@@ -23,7 +20,7 @@ const EligibleForBenefits = () => {
                 <RadioGroup.Option value="yes">
                     {({ checked }) => (
                         <div className='flex gap-2 items-center cursor-pointer'>
-                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                             <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>Yes</label>
                         </div>
                     )}
@@ -31,7 +28,7 @@ const EligibleForBenefits = () => {
                 <RadioGroup.Option value="no">
                     {({ checked }) => (
                         <div className='flex gap-2 items-center cursor-pointer'>
-                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                             <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>No</label>
                         </div>
                     )}
@@ -46,7 +43,7 @@ const EligibleForBenefits = () => {
                         <RadioGroup.Option value="Immediately">
                             {({ checked }) => (
                                 <div className='flex gap-2 items-center cursor-pointer'>
-                                    <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                                    <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                                     <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>Immediately</label>
                                 </div>
                             )}
@@ -54,7 +51,7 @@ const EligibleForBenefits = () => {
                         <RadioGroup.Option value="After their probation period">
                             {({ checked }) => (
                                 <div className='flex gap-2 items-center cursor-pointer'>
-                                    <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                                    <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                                     <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>After their probation period</label>
                                 </div>
                             )}
@@ -63,17 +60,17 @@ const EligibleForBenefits = () => {
                             {({ checked }) => (
                                 <div className='flex items-center gap-4'>
                                     <div className='flex gap-2 items-center cursor-pointer'>
-                                        <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                                        <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                                         <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>After</label>
                                     </div>
                                     <div className='flex gap-2 items-center'>
                                         <div className='px-4 py-2 rounded-lg border border-gray-300 bg-white'>
                                             <input type='number' className='bg-transparent w-[42px] h-5 block outline-none' placeholder='90' disabled={period !== 'After'} />
                                         </div>
-                                        <Menu as="div" className='min-w-40 w-full relative'>
+                                        <Menu as="div" className='min-w-40 w-full relative bg-white'>
                                             <Menu.Button className={`border border-gray-300 rounded-lg px-2.5 py-2 flex justify-between gap-2.5 items-center cursor-pointer min-w-40 w-full`} onClick={() => setToggle(!toggle)} disabled={period !== "After"}>
-                                                <span className='font-inter text-sm text-gray-900'>{selected ? selected : ""}</span>
-                                                <img src="/icons/arrow-down.svg" alt='Arrow down icon' className='w-2.5 h-2.5' />
+                                                <span className={`font-inter text-sm  ${period !== "After" ? "text-gray-400" : "text-gray-900"}`}>{selected ? selected : ""}</span>
+                                                <img src="/icons/arrow-down.svg" alt='Arrow down icon' className={`w-2.5 h-2.5 ${period !== 'After' && "opacity-50"}`} />
                                             </Menu.Button>
                                             <ul className={`border border-gray-200 rounded-lg shadow-md p-1.5 mt-0.5 duration-300 absolute bg-white w-full ${toggle ? "opacity-100 visible" : "opacity-0 invisible "}`}>
                                                 {
@@ -89,8 +86,8 @@ const EligibleForBenefits = () => {
                                         </Menu>
                                     </div>
                                 </div>
-
                             )}
+
                         </RadioGroup.Option>
                     </RadioGroup>
                 </div>

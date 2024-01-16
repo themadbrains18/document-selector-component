@@ -21,7 +21,7 @@ const Unions = () => {
                 <RadioGroup.Option value="yes">
                     {({ checked }) => (
                         <div className='flex gap-2 items-center cursor-pointer'>
-                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                             <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>Yes</label>
                         </div>
                     )}
@@ -29,7 +29,7 @@ const Unions = () => {
                 <RadioGroup.Option value="no">
                     {({ checked }) => (
                         <div className='flex gap-2 items-center cursor-pointer'>
-                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3px] border-orange-500' : ''}`}></span>
+                            <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                             <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>No</label>
                         </div>
                     )}

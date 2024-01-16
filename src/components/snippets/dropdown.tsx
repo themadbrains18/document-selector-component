@@ -38,19 +38,7 @@ const Dropdown = (props: DropdownProps) => {
                 aria-haspopup="true"
                 aria-expanded={toggle}>
                 <span className='text-sm text-gray-900 font-inter'>{props?.filterList?.heading}</span>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="10"
-                    height="11"
-                    fill="none"
-                    viewBox="0 0 10 11"
-                >
-                    <path
-                        fill="#111928"
-                        stroke="#111928"
-                        d="M4.714 7.39h0a.44.44 0 00.297.11l-.297-.11zm0 0l-3.6-3.327h0m3.6 3.326l-3.6-3.326m0 0l-.006-.006m.006.006l-.006-.006m0 0a.334.334 0 01-.082-.108.278.278 0 01-.002-.23.33.33 0 01.079-.108.409.409 0 01.133-.081.465.465 0 01.335.002c.051.02.096.05.13.083h0m-.593.442l.594-.442m0 0l.006.006m-.006-.006l.006.006m0 0L4.672 6.36l.34.313M1.707 3.621l3.303 3.052m0 0l.34-.313m-.34.313l.34-.313m0 0l2.96-2.735a.442.442 0 01.293-.105c.117.001.221.045.293.111.07.065.102.145.103.219a.299.299 0 01-.096.216L5.308 7.39h0m.042-1.03l-.042 1.03m0 0a.44.44 0 01-.297.111l.297-.11z"
-                    ></path>
-                </svg>
+                <img src='/icons/arrow-down.svg' alt='arrow icon' />
             </div>
 
             {/* Dropdown content */}
