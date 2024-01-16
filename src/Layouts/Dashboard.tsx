@@ -8,7 +8,7 @@ const Dashboard = () => {
     return (
         <>
             <DocContextProvider>
-                <div className='bg-gray-200'>
+                <div className='bg-gray-50'>
                     <Outlet />
                 </div>
             </DocContextProvider>

@@ -1,24 +1,22 @@
 import { useLayoutEffect, useState } from 'react'
-import DocumentSelector from '../components/documentSecelctor'
+import DocumentSelector from '../components/documents/documentSecelctor'
 import { useParams } from 'react-router'
-import StepperNav from '../components/header/stepperNav'
-import Navigator from '../components/footer/navigator'
+import StepperNav from '../components/documents/header/stepperNav'
+import Navigator from '../components/documents/footer/navigator'
 import { useNavigate } from "react-router-dom"
-import PersonalInfo from '../components/personalInfo'
-import Role from '../components/role/role'
-import RoleDetails from '../components/roleDetails/roleDetails'
-import Compensation from '../components/compensation/compensation'
-import AdditionalInfo from '../components/additionalInfo/additionalInfo'
-import Source from '../components/source/source'
-import Equipment from '../components/equipment/equipment'
-import Review from '../components/review/review'
-import Offer from '../components/offer/offer'
+import PersonalInfo from '../components/documents/personalInfo'
+import Role from '../components/documents/role/role'
+import RoleDetails from '../components/documents/roleDetails/roleDetails'
+import Compensation from '../components/documents/compensation'
+import AdditionalInfo from '../components/documents/additionalInfo/additionalInfo'
+import Source from '../components/documents/source/source'
+import Equipment from '../components/documents/equipment/equipment'
+import Review from '../components/documents/review/review'
+import Offer from '../components/documents/offer/offer'
 
 const Documents = () => {
     const navigate = useNavigate();
     const routes = useParams();
-
-
     console.log(routes?.document)
 
     const [screen, setScreen] = useState<String | undefined>(routes?.document || 'personal-info')
@@ -51,14 +49,15 @@ const Documents = () => {
             navigate(`/dashboard/documents/${getScreen}`);
         }
 
-        // 
         window.onload = (event) => {
-            breadcrumbs.filter((item: items, index: number) => {
+            /* eslint-disable */
+            breadcrumbs && breadcrumbs?.filter((item: items, index: number) => {
                 if (item.href === routes?.document)
                     setCurrentIndex(index)
             })
         };
     }, [routes?.document, currentIndex])
+
 
 
     return (

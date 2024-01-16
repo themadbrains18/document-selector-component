@@ -18,7 +18,10 @@ module.exports = {
         'green-500': '#0E9F6E',
         'blue-500': '#3F83F8',
         'blue-100': '#E1EFFE',
+        'blue-200': '#C3DDFD',
+        'blue-50': '#EBF5FF',
         'green-500': '#0E9F6E',
+        'primary-800':'#1E429F',
       },
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
