@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 
 interface Breadcrumb {
   name: string;
@@ -10,13 +11,14 @@ interface Breadcrumb {
 interface StepperProps {
   breadcrumbs: Breadcrumb[];
   currentIndex: number;
+  setCurrentIndex: Function;
 }
 
 
 // Step Navigator
 export default function StepperNav(props: StepperProps) {
   return (
-    <div className='w-full px-6 py-4 bg-white border-b border-gray-200 fixed top-0 z-10'>
+    <div className='w-full px-6 py-4 bg-white border-b border-gray-200 fixed top-0 z-20'>
       <div className='flex justify-between items-center mb-6'>
         {/* Header title */}
         <h2 className='font-inter text-2xl text-gray-900 font-bold'>Select Agreements, Notices and Other Documents</h2>
@@ -26,7 +28,7 @@ export default function StepperNav(props: StepperProps) {
           className="inline-flex justify-center rounded-md border px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 items-center gap-2  border-gray-200"
         >
           <div className='flex items-center justify-center w-4 h-4'>
-            <img src='/icons/cross-button.svg' alt='checkmark icon' />
+            <img src='/icons/cross-button.svg' alt='Close icon' />
           </div>
           <span>Save & Close</span>
         </button>
@@ -34,7 +36,7 @@ export default function StepperNav(props: StepperProps) {
       <div className="">
         {/* Breadcrumb navigation */}
         <nav className="flex" aria-label="Breadcrumb">
-          <div className="flex items-center gap-2.5 overflow-x-auto">
+          <div className="flex items-center  gap-2.5 overflow-x-auto justify-between w-full">
             {props?.breadcrumbs.map((breadcrumb, index) => (
               <Fragment key={index}>
                 {/* Separator icon */}
@@ -47,15 +49,16 @@ export default function StepperNav(props: StepperProps) {
                 <Popover>
                   {({ open }) => (
                     <>
-                      <div
-                        // to={breadcrumb.href} 
+                      <Link
+                        onClick={() => props?.setCurrentIndex(index)}
+                        to={`/dashboard/documents/${breadcrumb.href}`}
                         className={`block leading-[19px] cursor-default text-sm font-semibold text-gray-600 hover:text-[#ff8a4c] hover:border-[#ff8a4c] focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500 hover:border-gray-200' : 'text-gray-600'} 
                         ${props?.currentIndex === index ? 'text-orange-500 bg-orange-50 border-orange-500' : ''}`}>
                         {breadcrumb.name}
                         <span className="sr-only">
                           {index + 1 === props?.breadcrumbs.length ? '(current page)' : ''}
                         </span>
-                      </div>
+                      </Link>
 
                       {/* Breadcrumb details */}
                       <Transition

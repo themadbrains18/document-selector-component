@@ -23,6 +23,10 @@ module.exports = {
         'green-500': '#0E9F6E',
         'primary-800':'#1E429F',
       },
+
+
+
+      
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],
       },

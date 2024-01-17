@@ -65,7 +65,7 @@ const EligibleForBenefits = () => {
                                     </div>
                                     <div className='flex gap-2 items-center'>
                                         <div className='px-4 py-2 rounded-lg border border-gray-300 bg-white'>
-                                            <input type='number' className='bg-transparent w-[42px] h-5 block outline-none' placeholder='90' disabled={period !== 'After'} />
+                                            <input type='number' className='bg-transparent w-[42px] h-5 block outline-none' placeholder='90' value={ period !== 'After' ? "": 90} disabled={period !== 'After'} />
                                         </div>
                                         <Menu as="div" className='min-w-40 w-full relative bg-white'>
                                             <Menu.Button className={`border border-gray-300 rounded-lg px-2.5 py-2 flex justify-between gap-2.5 items-center cursor-pointer min-w-40 w-full`} onClick={() => setToggle(!toggle)} disabled={period !== "After"}>

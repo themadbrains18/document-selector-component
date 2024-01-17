@@ -63,7 +63,7 @@ const Documents = () => {
     return (
         <>
             {/* Step Navigator  */}
-            <StepperNav breadcrumbs={breadcrumbs} currentIndex={currentIndex} />
+            <StepperNav breadcrumbs={breadcrumbs} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
 
             {screen === "personal-info" && <PersonalInfo />}
             {screen === "role" && <Role />}

@@ -3,6 +3,9 @@ import Dropdown from '../../snippets/dropdown'
 import Accordion from '../../snippets/accordion'
 import { Switch } from '@headlessui/react'
 
+function classNames(...classes: any) {
+    return classes.filter(Boolean).join(' ')
+}
 
 const AvailableDocuments = () => {
     // State for enabling/disabling notifications
@@ -108,6 +111,7 @@ const AvailableDocuments = () => {
                             filterList={filterList}
                             selectedFilters={selectedFilters[filterList.heading]}
                             onSelect={(selectedItems) => handleFilterSelect(filterList.heading, selectedItems)}
+                            // index={index}
                         />
                     </Fragment>
                 ))}
@@ -143,13 +147,18 @@ const AvailableDocuments = () => {
                     <Switch
                         checked={enabled}
                         onChange={setEnabled}
-                        className={`${enabled ? 'bg-orange-500' : 'bg-gray-200'
-                            } relative inline-flex h-7 w-14 items-center rounded-full`}
+                        className={classNames(
+                            enabled ? 'bg-orange-500' : 'bg-gray-200',
+                            'relative inline-flex h-7 w-14 items-center rounded-full'
+                        )}
                     >
-                        <span className="sr-only">Enable notifications</span>
+                        <span className="sr-only">Select All</span>
                         <span
-                            className={`${enabled ? 'translate-x-8' : 'translate-x-1'
-                                } inline-block h-5 w-5 transform rounded-full bg-white transition`}
+                            aria-hidden="true"
+                            className={classNames(
+                                enabled ? 'translate-x-8' : 'translate-x-1',
+                                'pointer-events-none inline-block h-[21px] -translate-y-[0.7px] w-[21px] transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
+                            )}
                         />
                     </Switch>
                     <span className="ms-2 text-gray-900 font-inter">

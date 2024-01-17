@@ -9,7 +9,7 @@ const unions = [
 ]
 
 const Unions = () => {
-    let [plan, setPlan] = useState()
+    let [plan, setPlan] = useState<String | undefined>()
     const [selected, setSelected] = useState<String>();
     const [toggle, setToggle] = useState(false);
     const [unionId, setUnionId] = useState<number>();
@@ -90,6 +90,7 @@ const Unions = () => {
                                 </div>
                             </div>
                             <button
+                                onClick={()=>{setPlan("yes")} }
                                 type="button"
                                 className="inline-flex mt-4 justify-center rounded-md border px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 items-center gap-2  border-gray-200"
                             >
@@ -102,6 +103,8 @@ const Unions = () => {
                     }
                 </div>
             }
+
+
         </div >
     )
 }
