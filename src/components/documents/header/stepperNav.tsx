@@ -52,7 +52,7 @@ export default function StepperNav(props: StepperProps) {
                       <Link
                         onClick={() => props?.setCurrentIndex(index)}
                         to={`/dashboard/documents/${breadcrumb.href}`}
-                        className={`block leading-[19px] cursor-default text-sm font-semibold text-gray-600 hover:text-[#ff8a4c] hover:border-[#ff8a4c] focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500 hover:border-gray-200' : 'text-gray-600'} 
+                        className={`block leading-[19px] text-sm font-semibold text-gray-600 hover:text-[#ff8a4c] hover:border-[#ff8a4c] focus:outline-none  px-4 py-3 rounded-md border-[1.5px] border-gray-200 whitespace-nowrap  ${index < props?.currentIndex ? '!text-green-500 hover:border-gray-200' : 'text-gray-600'} 
                         ${props?.currentIndex === index ? 'text-orange-500 bg-orange-50 border-orange-500' : ''}`}>
                         {breadcrumb.name}
                         <span className="sr-only">

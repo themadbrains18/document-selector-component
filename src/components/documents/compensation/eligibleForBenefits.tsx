@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { RadioGroup, Menu } from '@headlessui/react'
 
 const EligibleForBenefits = () => {
+    // State Variables
     let [plan, setPlan] = useState();
     let [period, setPeriod] = useState();
 
     const [selected, setSelected] = useState<String>("Days");
     const [toggle, setToggle] = useState(false);
-    // const [unionId, setUnionId] = useState<number>();
+
+    // Time options after "After" is chosen
     const afterTimes = [
         { time: 'Days' },
         { time: 'Month(s)' },
@@ -16,7 +18,9 @@ const EligibleForBenefits = () => {
     return (
         <div className='py-6  border-b border-gray-200 '>
             <p className='text-sm text-gray-900 font-inter font-medium mb-2'>Should Jason Smith automatically become eligible for benefits?</p>
+
             <RadioGroup value={plan} onChange={setPlan} className={`flex gap-4 items-center`}>
+                {/* Radio button for "Yes" */}
                 <RadioGroup.Option value="yes">
                     {({ checked }) => (
                         <div className='flex gap-2 items-center cursor-pointer'>
@@ -35,11 +39,15 @@ const EligibleForBenefits = () => {
                 </RadioGroup.Option>
             </RadioGroup>
 
+            {/* Conditional rendering based on the "Yes" selection */}
             {
                 plan === "yes" &&
                 <div className='py-4'>
                     <h3 className='text-sm text-gray-900 font-inter font-medium'>Great, when?</h3>
+
+                    {/* Radio buttons for time period selection  */}
                     <RadioGroup value={period} onChange={setPeriod} className={`flex gap-4 items-center my-2`}>
+                        {/* Radio button for "Immediately" */}
                         <RadioGroup.Option value="Immediately">
                             {({ checked }) => (
                                 <div className='flex gap-2 items-center cursor-pointer'>
@@ -48,6 +56,8 @@ const EligibleForBenefits = () => {
                                 </div>
                             )}
                         </RadioGroup.Option>
+
+                        {/* Radio button for "After" with customizable time period */}
                         <RadioGroup.Option value="After their probation period">
                             {({ checked }) => (
                                 <div className='flex gap-2 items-center cursor-pointer'>
@@ -63,10 +73,12 @@ const EligibleForBenefits = () => {
                                         <span className={`inline-block w-4 h-4 rounded-full  bg-gray-50 border-[0.5px] border-gray-300 ${checked ? 'border-[3.5px] border-orange-500' : ''}`}></span>
                                         <label className='text-sm text-gray-900 font-inter font-medium cursor-pointer'>After</label>
                                     </div>
+                                    {/* Input for custom time period */}
                                     <div className='flex gap-2 items-center'>
                                         <div className='px-4 py-2 rounded-lg border border-gray-300 bg-white'>
-                                            <input type='number' className='bg-transparent w-[42px] h-5 block outline-none' placeholder='90' value={ period !== 'After' ? "": 90} disabled={period !== 'After'} />
+                                            <input type='number' className='bg-transparent w-[42px] h-5 block outline-none' placeholder='90' value={period !== 'After' ? "" : 90} disabled={period !== 'After'} />
                                         </div>
+                                        {/* Dropdown for time options */}
                                         <Menu as="div" className='min-w-40 w-full relative bg-white'>
                                             <Menu.Button className={`border border-gray-300 rounded-lg px-2.5 py-2 flex justify-between gap-2.5 items-center cursor-pointer min-w-40 w-full`} onClick={() => setToggle(!toggle)} disabled={period !== "After"}>
                                                 <span className={`font-inter text-sm  ${period !== "After" ? "text-gray-400" : "text-gray-900"}`}>{selected ? selected : ""}</span>
